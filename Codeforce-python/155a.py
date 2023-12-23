@@ -31,19 +31,13 @@
 
 Во втором примере удивительными являются выступления с номерами 2, 4, 9 и 10.
 '''
-n = int(input())
-scores = list(map(int, input().split()))
+n, k = map(int, input().split())
 
-amazing_performances = 0
-max_score = scores[0]
-min_score = scores[0]
+x = 0
+total_time = 0
 
-for i in range(1, n):
-    if scores[i] > max_score:
-        amazing_performances += 1
-        max_score = scores[i]
-    elif scores[i] < min_score:
-        amazing_performances += 1
-        min_score = scores[i]
+while total_time + 5 * (x + 1) + k <= 240 and x < n:
+    x += 1
+    total_time += 5 * x
 
-print(amazing_performances)
+print(x)
