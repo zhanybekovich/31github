@@ -8,6 +8,13 @@ let isEditMode = false;
 
 /* Function declarations */
 
+// check if item exists
+function checkItemExists(item) {
+  const itemsFromStorage = getItemsFromStorage();
+
+  return itemsFromStorage.includes(item);
+}
+
 // Create icon function
 function createIcon(classes) {
   const icon = document.createElement("i");
@@ -79,6 +86,12 @@ function onAddItemSubmit(e) {
   if (isEditMode) {
     const itemToEdit = itemList.querySelector(".edit-mode");
 
+    if (checkItemExists(newItem)) {
+      alert("Exists");
+
+      return;
+    }
+
     removeItemFromStorage(itemToEdit.textContent);
 
     itemToEdit.classList.remove("edit-mode");
@@ -86,6 +99,12 @@ function onAddItemSubmit(e) {
     itemToEdit.remove();
 
     isEditMode = false;
+  } else {
+    if (checkItemExists(newItem)) {
+      alert("That item already exists!");
+
+      return;
+    }
   }
 
   addItemToDOM(newItem);
